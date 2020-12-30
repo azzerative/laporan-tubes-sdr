@@ -1,5 +1,8 @@
 \chapter{Analisis}
 
+\section{Pemilihan Training Data}
+Data pada bulan 8 dipilih sebagai training data karena pada bulan tersebut tidak terjadi kerusakan mesin. Disini penulis berasumsi bahwa pada bulan 8 tidak terjadi anomali sama sekali pada data, karena tidak terjadi kerusakan mesin. Namun pada bulan lainnya, walau ada bagian data yang memiliki status mesin NORMAL, bisa saja sebenarnya sudah terjadi anomaly yang menyebabkan machine BROKEN pada hari-hari setelahnya.
+
 \section{LSTM Autoencoder}
 
 Data dipisah menjadi dua bagian, yaitu data normal yang mengandung data dari status NORMAL dan data anomali yang berasal dari status selain NORMAL (BROKEN dan RECOVERY).
@@ -52,10 +55,55 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \end{tabular}
     \end{table}
 
-    Terlihat bahwa jumlah anomali pada data NORMAL lebih sedikit 3\% dari analisis dengan PCA, namun jumlah anomali pada data selain NORMAL juga meningkat hampir 2 kali lipat.
+    Terlihat bahwa jumlah anomali pada data NORMAL lebih sedikit 3\% dari analisis dengan PCA, Namun jumlah anomali pada data selain NORMAL juga meningkat hampir 2 kali lipat.
 
-    \subsection{Perbandingan dengan Model Acuan}
+\section{Bayesian Probability}
 
-    Dari segi kinerja model LSTM dapat menghasilkan hasil yang lebih baik dari model acuan sebanding dengan jumlah epoch yang lebih tinggi, namun waktu learning juga akan menjadi semakin lama. Sedangkan model acuan dapat dijalankan dalam waktu yang singkat (orde detik).
+Data dipisah menjadi training data dan test data. Tidak ada validation data disini, karena validation data digunakan untuk mencegah model overfitting pada training data. Namun karena model bayesian adalah distribusi probabilitas, maka validation data akan menggeser kontur probabilitas dari overfitting pada training data menjadi tepat fit pada training dan validation data sekaligus. Jadi hasilnya tidak akan ada bedanya jika model dilatih pada training dan validation data yang digabungkan. Karena itu, validation data sudah digabungkan kedalam training data, yaitu data pada bulan 8.
 
-    Model dengan dan tanpa PCA masing-masing menghasilkan prediksi anomali pada data NORMAL sebanyak 21\% dan 19\% dari total data, lebih besar dari model acuan yang paling tinggi menghasilkan 14\%.
+Hasil prediksi model Bayesian pada test data menghasilkan distribusi probabilitas data merupakan data normal sebagai berikut.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/Bayes/Bayes_ProbDist.png}
+    \caption{Prediksi Probabilitas bukan Anomali}
+\end{figure}
+Kemudian probabilitas tidak terjadi anomali dan terjadi anomali pada tiap waktu sebagai berikut.
+\begin{figure}[h]
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_normal_PMF.png}}
+    \caption{Prediksi Probabilitas bukan Anomali}
+\end{figure}
+\begin{figure}[h]
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_anomaly_PMF.png}}
+    \caption{Prediksi Probabilitas terjadi Anomali}
+\end{figure}
+Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas suatu data merupakan data normal dibawah 0.85 sudah ditetapkan sebagai data yang likely merupakan anomaly. Diperoleh jumlah data anomali sebagai berikut.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|r|r|}
+        \hline
+        \multicolumn{1}{|c|}{\textbf{Jenis anomali}} & \multicolumn{1}{c|}{\textbf{Jumlah}} & \multicolumn{1}{c|}{\textbf{Total data}} & \multicolumn{1}{c|}{\textbf{Persentase (\%)}} \\ \hline
+        Anomali pada data NORMAL                     & 34527                                & 160430                                   & 22                                       \\ \hline
+        Anomali pada data selain NORMAL              & 2567                                 & 14454                                    & 18                                       \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Perbandingan Hasil}
+Ketiga model memiliki ....
+
+\begin{figure}[h]
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_sensor_11.png}}
+    \caption{Hasil deteksi anomali model LSTM tanpa PCA}
+\end{figure}
+\begin{figure}[h]
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_sensor_11.png}}
+    \caption{Hasil deteksi anomali model LSTM dengan PCA}
+\end{figure}
+\begin{figure}[h]
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_sensor_11.png}}
+    \caption{Hasil deteksi anomali model Bayesian}
+\end{figure}

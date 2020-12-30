@@ -1,6 +1,6 @@
 \chapter{Metode Kembangan}
 
-Terdapat 2 metode yang penulis kembangkan. Metode pertama adalah model LSTM Autoencoder yang merupakan metode umum digunakan data engineer untuk anomaly detection. Metode kedua adalah model Bayesian Probability yang merupakan model inovasi buatan penulis sendiri.
+Terdapat 2 metode yang penulis kembangkan. Metode pertama adalah model LSTM Autoencoder yang merupakan metode umum yang digunakan data engineer untuk anomaly detection. Metode kedua adalah model Bayesian Probability yang merupakan model inovasi buatan penulis sendiri.
 
 \section{LSTM Autoencoder}
 
@@ -29,11 +29,25 @@ Karena lebih cocok untuk data time series, maka diharapkan model ini mampu membe
 Model LSTM Autoencoder didefinisikan melalui class \texttt{Encoder} dan \texttt{Decoder} yang kemudian digabung pada class \texttt{RecurrentAutoencoder}.
 
 \section{Bayesian Probability}
-\subsection{Idea and Concept}
+\subsection{Ide, Konsep, dan Hipotesis}
 
 Ide awal untuk menggunakan model Bayesian untuk anomaly detection berasal dari konsep anomaly detection menggunakan pendekatan identifikasi data outlier. Beberapa metode umum untuk mendeteksi data outlier seperti K-Means Clustering dan Isolation Forest menggunakan konsep pengelompokkan data atau clustering data. Sehingga akan diperoleh data-data yang berada didalam cluster tersebut dan data yang berada diluar cluster diidentifikasi sebagai outlier.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=200px]{resources/Bayes/isoforest.png}
+    \caption{Isolation Forest Clustering}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=200px]{resources/Bayes/bayes_model.png}
+    \caption{Bayesian model untuk respon biner}
+\end{figure}
+
 Terlihat disini bahwa pendekatan clustering ini mirip dengan model Bayesian untuk respon biner. Asumsikan setiap data memiliki suatu probabilitas apakah data tersebut termasuk pada cluster normal ataukah outlier. Dengan begitu, dapat diekspektasi distribusi probabilitas akan memiliki kontur lingkaran. Semakin dekat suatu data dengan pusat lingkaran, maka data tersebut semakin likely merupakan data normal. Pusat lingkaran akan menjadi titik dengan probabilitas suatu data merupakan data normal sebesar 1, artinya pusat lingkaran adalah titik data ideal dari kondisi normal dataset, dalam kasus ini yaitu hasil pengukuran ideal dari sensor-sensor pada sistem mesin. Sebaliknya, semakin jauh dari pusat lingkaran maka akan semakin unlikely data tersebut adalah data normal, atau dalam arti lain: data tersebut semakin likely merupakan anomaly.
+
+Hipotesis penulis terhadap model ini adalah model dapat dengan mudah mendeteksi anomaly ketika data tersebut outlier atau jauh dari data normal lain. Anomaly yang terjadi pada pinggiran cluster normal akan memiliki kemungkinan terdeteksi dan tidak, bergantung pada threshold yang digunakan. Namun model akan sulit mendeteksi anomaly yang berada ditengah-tengah kumpulan data normal.
 
 \subsection{Deriving the Maths}
 
@@ -59,7 +73,7 @@ sebagai vektor parameter yang menentukan bentuk dan posisi kontur. Kemudian, den
 \end{equation*}
 Untuk penyederhanaan penulisan, $f(\mathbf{w,x_n})$ akan disingkat sebagai $f$ dan $P(T_n=1|\mathbf{x_n}, \mathbf{w})$ sebagai $P_n$.
 \begin{equation}
-    P_n = \frac{1}{1+f}
+    P_n = \frac{1}{1+f} \label{Pn}
 \end{equation}
 Konsep model bayesian menggunakan pendekatan dengan memisalkan suatu sampling dengan rasio sukses $p = P(T_n=1|\mathbf{x_n},\mathbf{w})$, sampling dilakukan hanya 1 kali ($N=1$) untuk total sukses sebanyak $Y_N=t_n$. Maka dengan distribusi binomial
 \begin{align*}
@@ -208,31 +222,6 @@ dengan $\delta_{ij}$ adalah fungsi delta kronecker. Kemudian persamaan \ref{fung
 \end{equation}
 
 
-\subsection{Algorithms}
+\subsection{Algorithma}
 
-\begin{python}
-    time = datetime.datetime.now()
-    print("Start training at : {}".format(time))
-    
-    w = np.zeros(2)
-    var_w = 10
-    w_iter = []
-    w_iter.append(w)
-    maxIter = 10
-    nIter = 1
-    tol = 10**-6
-    delta = 10**6
-    while (nIter<maxIter) and (delta>tol):
-        Hess = H_mat(t,w,X_scaled)
-        F_vector = F_vec(t,w,X_scaled)
-        dw = np.matmul(np.linalg.inv(Hess),F_vector)
-        delta = sum(dw**2)
-        w = w - dw
-        print("nIter = %d, delta=%.2e"%(nIter,delta))
-        w_iter.append(w)
-        nIter += 1
-    
-    time = datetime.datetime.now()
-    print("Done training at : {}".format(time))
-
-\end{python}
+Model bayesian hanya didefinisikan dengan array yang mewakili parameter $\mathbf{w}$. Kemudian model training dilakukan dengan meng-iterasi $\mathbf{w}$ menggunakan persamaan \ref{iter} hingga hasil iterasi konvergen. Kemudian hasil parameter $\mathbf{w}$ digunakan kembali untuk persamaan \ref{Pn} dan \ref{fungsi_f} dengan input test data. Probabilitas suatu data merupakan data normal dari seluruh test data akan diperoleh.
