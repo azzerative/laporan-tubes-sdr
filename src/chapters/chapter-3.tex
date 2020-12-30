@@ -5,3 +5,30 @@
 
 \section{Bayesian Probability}
 \blindtext
+
+\begin{python}
+    time = datetime.datetime.now()
+    print("Start training at : {}".format(time))
+    
+    w = np.zeros(2)
+    var_w = 10
+    w_iter = []
+    w_iter.append(w)
+    maxIter = 10
+    nIter = 1
+    tol = 10**-6
+    delta = 10**6
+    while (nIter<maxIter) and (delta>tol):
+        Hess = H_mat(t,w,X_scaled)
+        F_vector = F_vec(t,w,X_scaled)
+        dw = np.matmul(np.linalg.inv(Hess),F_vector)
+        delta = sum(dw**2)
+        w = w - dw
+        print("nIter = %d, delta=%.2e"%(nIter,delta))
+        w_iter.append(w)
+        nIter += 1
+    
+    time = datetime.datetime.now()
+    print("Done training at : {}".format(time))
+
+\end{python}
