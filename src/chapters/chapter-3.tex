@@ -10,7 +10,7 @@ LSTM cocok untuk mengklasifikasi, memproses, dan memprediksi data time series, k
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{resources/LSTM/LSTM_cell.png}
+    \includegraphics[width=0.6\textwidth]{resources/LSTM/LSTM_cell.png}
     \caption{Satu sel LSTM}
 \end{figure}
 
@@ -25,6 +25,8 @@ LSTM Autoencoder adalah model neural network yang menggunakan LSTM sebagai hidde
 Dengan begitu autoencoder dapat mempelajari fitur-fitur yang dimiliki input sehingga dapat melakukan prediksi, dan jika menggunakan LSTM sebagai hidden layernya maka dapat digunakan untuk memprediksi input berupa time series.
 
 Karena lebih cocok untuk data time series, maka diharapkan model ini mampu memberikan hasil lebih baik dari model acuan.
+
+Model LSTM Autoencoder didefinisikan melalui class \texttt{Encoder} dan \texttt{Decoder} yang kemudian digabung pada class \texttt{RecurrentAutoencoder}.
 
 \section{Bayesian Probability}
 \subsection{Idea and Concept}
@@ -133,7 +135,7 @@ Variabel $t_n$ adalah data yang diketahui dari dataset, ini berarti $t_n$ indepe
 \end{equation}
 Selesaikan dahulu suku $\frac{\partial{P_n}}{\partial{\mathbf{w}}}$
 \begin{equation*}
-    \frac{\partial{P_n}}{\partial{\mathbf{w}}} = \frac{\partial{P_n}}{\partial{f}} \frac{\partial{f}}{\partial{\mathbf{w}}} = frac{\partial}{\partial{f}} \left( \frac{1}{1+f} \right) \frac{\partial{f}}{\partial{\mathbf{w}}}
+    \frac{\partial{P_n}}{\partial{\mathbf{w}}} = \frac{\partial{P_n}}{\partial{f}} \frac{\partial{f}}{\partial{\mathbf{w}}} = \frac{\partial}{\partial{f}} \left( \frac{1}{1+f} \right) \frac{\partial{f}}{\partial{\mathbf{w}}}
 \end{equation*}
 Definisikan suatu fungsi $g(f)$ sebagai
 \begin{equation}
