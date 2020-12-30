@@ -69,13 +69,13 @@ Hasil prediksi model Bayesian pada test data menghasilkan distribusi probabilita
 \end{figure}
 Kemudian probabilitas tidak terjadi anomali dan terjadi anomali pada tiap waktu sebagai berikut.
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{resources/Bayes/Bayes_normal_PMF.png}
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_normal_PMF.png}}
     \caption{Prediksi Probabilitas bukan Anomali}
 \end{figure}
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{resources/Bayes/Bayes_anomaly_PMF.png}
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_anomaly_PMF.png}}
     \caption{Prediksi Probabilitas terjadi Anomali}
 \end{figure}
 Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas suatu data merupakan data normal dibawah 0.85 sudah ditetapkan sebagai data yang likely merupakan anomaly. Diperoleh jumlah data anomali sebagai berikut.
@@ -93,17 +93,17 @@ Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas su
 Ketiga model memiliki ....
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{resources/LSTM/LSTM_noPCA_sensor_11.png}
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_sensor_11.png}}
     \caption{Hasil deteksi anomali model LSTM tanpa PCA}
 \end{figure}
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{resources/LSTM/LSTM_PCA_sensor_11.png}
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_sensor_11.png}}
     \caption{Hasil deteksi anomali model LSTM dengan PCA}
 \end{figure}
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{resources/Bayes/Bayes_sensor_11.png}
+    %\centering
+    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_sensor_11.png}}
     \caption{Hasil deteksi anomali model Bayesian}
 \end{figure}
