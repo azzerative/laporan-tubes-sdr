@@ -60,15 +60,12 @@ Untuk penyederhanaan penulisan, $f(\mathbf{w,x_n})$ akan disingkat sebagai $f$ d
     P_n = \frac{1}{1+f}
 \end{equation}
 Konsep model bayesian menggunakan pendekatan dengan memisalkan suatu sampling dengan rasio sukses $p = P(T_n=1|\mathbf{x_n},\mathbf{w})$, sampling dilakukan hanya 1 kali ($N=1$) untuk total sukses sebanyak $Y_N=t_n$. Maka dengan distribusi binomial
-\begin{equation*}
-    P(T_n=t_n|\mathbf{x_n},\mathbf{w})=\mathbf{Binomial}(Y_N=y|p,N)=\frac{N!}{(N-y)!y!}p^{y}(1-p)^{N-y}
-\end{equation*}
-\begin{equation*}
-    P(T_n=t_n|\mathbf{x_n},\mathbf{w})=P(T_n=1|x_n,w)^{t_n}\left(1-P(T_n=1|x_n,w)\right)^{1-t_n}
-\end{equation*}
-\begin{equation}
-    P(T_n=t_n|\mathbf{x_n},\mathbf{w})=P_n^{t_n}\left(1-P_n)\right)^{1-t_n} \label{likelihood}
-\end{equation}
+\begin{align*}
+    P(T_n=t_n|\mathbf{x_n},\mathbf{w})&=\mathbf{Binomial}(Y_N=y|p,N)\\
+    &=\frac{N!}{(N-y)!y!}p^{y}(1-p)^{N-y}\\
+    &=P(T_n=1|x_n,w)^{t_n}\left(1-P(T_n=1|x_n,w)\right)^{1-t_n}\\
+    &=P_n^{t_n}\left(1-P_n)\right)^{1-t_n} \numberthis \label{likelihood}
+\end{align*}
 Berdasarkan data yang diketahui ($\mathbf{x_n}$ dan $t_n$), dengan asumsi seluruh data saling independen, dapat dihitung probability likelihood sebagai
 \begin{equation*}
     p(t|\mathbf{X},\mathbf{w})=\prod_{n=1}^{N} P(T_n=t_n|\mathbf{x_n},\mathbf{w})
@@ -133,7 +130,7 @@ Variabel $t_n$ adalah data yang diketahui dari dataset, ini berarti $t_n$ indepe
 \end{equation}
 Selesaikan dahulu suku $\frac{\partial{P_n}}{\partial{\mathbf{w}}}$
 \begin{equation*}
-    \frac{\partial{P_n}}{\partial{\mathbf{w}}} = \frac{\partial{P_n}}{\partial{f}} \frac{\partial{f}}{\partial{\mathbf{w}}} = frac{\partial}{\partial{f}} \left( \frac{1}{1+f} \right) \frac{\partial{f}}{\partial{\mathbf{w}}}
+    \frac{\partial{P_n}}{\partial{\mathbf{w}}} = \frac{\partial{P_n}}{\partial{f}} \frac{\partial{f}}{\partial{\mathbf{w}}} = \frac{\partial}{\partial{f}} \left( \frac{1}{1+f} \right) \frac{\partial{f}}{\partial{\mathbf{w}}}
 \end{equation*}
 Definisikan suatu fungsi $g(f)$ sebagai
 \begin{equation}
@@ -149,16 +146,20 @@ dengan
 \end{equation}
 dan dari persamaan \ref{fungsi_f}, dapat diperoleh
 \begin{equation}
-    \frac{\partial{f}}{\partial{w_n}} = 2(w_n+x_n) \label{dfdwn}
+    \frac{\partial{f}}{\partial{w_i}} = 2(w_i+x_i) \label{dfdwn}
+\end{equation}
+serta komponen-komponen pada vektor $\frac{\partial{P_n}}{\partial{\mathbf{w}}}$ menjadi
+\begin{equation}
+    \frac{\partial{P_n}}{\partial{w_i}} = g \frac{\partial{f}}{\partial{w_i}} \label{dPndwn}
 \end{equation}
 Maka, dengan persamaan \ref{dPndw_vec} persamaan \ref{ODE_2nd_term} menjadi
 \begin{align*}
     \frac{\partial}{\partial{\mathbf{w}}} \ln{\left[ \prod_{n=1}^{N} P_n^{t_n}\left(1-P_n\right)^{1-t_n} \right] } & = \sum_{n=1}^{N} t_n \frac{\partial}{\partial{\mathbf{w}}}\ln{(P_n)} + (1-t_n) \frac{\partial}{\partial{\mathbf{w}}} \ln{(1-P_n)} \\
     & = \sum_{n=1}^{N} t_n \frac{1}{P_n} \frac{\partial{P_n}}{\partial{\mathbf{w}}} - (1-t_n) \frac{1}{(1-P_n)} \frac{\partial{P_n}}{\partial{\mathbf{w}}} \\
     & = \sum_{n=1}^{N} t_n \frac{1}{P_n} g \frac{\partial{f}}{\partial{\mathbf{w}}} - (1-t_n) \frac{1}{(1-P_n)} g \frac{\partial{f}}{\partial{\mathbf{w}}} \\
-    & = \sum_{n=1}^{N} \frac{(t_n-P_n)g}{P_n(1-P_n)} \frac{\partial{f}}{\partial{\mathbf{w}}}
+    & = \sum_{n=1}^{N} \frac{(t_n-P_n)g}{P_n(1-P_n)} \frac{\partial{f}}{\partial{\mathbf{w}}} \numberthis \label{ODE_2nd_term_2}
 \end{align*}
-dan dengan \ref{ODE_1st_term} didapatkan persamaan \ref{ODE} menjadi
+Dengan persamaan \ref{ODE_1st_term} dan \ref{ODE_2nd_term_2} didapatkan persamaan \ref{ODE} menjadi
 \begin{equation}
     -\frac{\mathbf{w^T}}{\sigma^2}+\sum_{n=1}^{N} \frac{(t_n-P_n)g}{P_n(1-P_n)} \frac{\partial{f}}{\partial{\mathbf{w}}}=0 \label{ODE_final}
 \end{equation}
@@ -179,22 +180,29 @@ Dengan $\mathbf{H}$ adalah Hessian matrix
     \end{bmatrix} \label{H_mat}
 \end{equation}
 dan $F_0$ serta $F_1$ adalah komponen-komponen dari vektor $\mathbf{F}(\mathbf{w})$. Elemen-elemen pada matrix hessian dapat ditentukan dengan
-\begin{equation}
-    \frac{\partial{F_m}}{\partial{w_n}} = - \frac{\delta_{mn}}{\sigma^2} + \sum_{n=1}^{N} \left(
-    \frac{1}{P_n(1-P_n)}
+\begin{align*}
+    \frac{\partial{F_j}}{\partial{w_i}} =& - \frac{\delta_{ij}}{\sigma^2} + \sum_{n=1}^{N}
     \left[
-    (t_n-P_n) \frac{\partial{g}}{\partial{w_n}} - g \frac{\partial{P_n}}{\partial{w_n}}
-    \right]
-    - \frac{(t_n-P_n)g}{P_n^2(1-P_n)^2} (1-2P_n) \frac{\partial{P_n}}{\partial{w_n}}
+        \frac{(t_n-P_n)g}{P_n(1-P_n)} \frac{\partial^2{f}}{\partial{w_i}\partial{w_j}}
+    \right] \\
+    &+ \sum_{n=1}^{N}
+    \left[
+    \left(
+    \frac{
+    (t_n-P_n) \frac{\partial{g}}{\partial{w_i}} - g \frac{\partial{P_n}}{\partial{w_i}}
+    }{P_n(1-P_n)}
+    - \frac{(t_n-P_n)g}{P_n^2(1-P_n)^2} (1-2P_n) \frac{\partial{P_n}}{\partial{w_i}}
     \right)
-    \frac{\partial{f}}{\partial{w_m}} + \frac{(t_n-P_n)g}{P_n(1-P_n)} \frac{\partial^2{f}}{\partial{w_n}\partial{w_m}} \label{dFn_dwm}
-\end{equation}
-dengan $\delta_{mn}$ adalah fungsi delta kronecker. Kemudian persamaan \ref{fungsi_g} dan \ref{fungsi_f} dapat diperoleh
+    \frac{\partial{f}}{\partial{w_j}}
+    \right]
+    \numberthis \label{dFn_dwm}
+\end{align*}
+dengan $\delta_{ij}$ adalah fungsi delta kronecker. Kemudian persamaan \ref{fungsi_g} dan \ref{fungsi_f} dapat diperoleh
 \begin{equation}
-    \frac{\partial{g}}{\partial{w_n}} = \frac{1}{(1+f)^3} \frac{\partial{f}}{\partial{w_n}} \label{dotg}
+    \frac{\partial{g}}{\partial{w_i}} = \frac{1}{(1+f)^3} \frac{\partial{f}}{\partial{w_i}} \label{dotg}
 \end{equation}
 \begin{equation}
-    \frac{\partial^2{f}}{\partial{w_n}\partial{w_m}} = 2\delta_{mn} \label{ddotf}
+    \frac{\partial^2{f}}{\partial{w_i}\partial{w_j}} = 2\delta_{ij} \label{ddotf}
 \end{equation}
 
 
