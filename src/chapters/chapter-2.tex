@@ -1,20 +1,103 @@
 \chapter{Metode Acuan}
 
 \section{What Data is it?}
-Perujukan literatur dapat dilakukan dengan menambahkan entri baru di berkas. Tulisan ini merujuk pada \parencite{knuth2001art}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{resources/chapter-2-infrastructure-diagram.png}
-    \caption{Contoh gambar}
-\end{figure}
+Data yang digunakan adalah data pembacaan sensor pada pompa air yang berasal dari seorang pengguna di Kaggle. Pompa air yang digunakan sering mengalami kerusakan sehingga menimbulkan permasalahan serius terhadap kehidupan warga. Tim yang bekerja tidak dapat melihat pola apapun pada data ketika sistem rusak, sehingga diharapkan dapat ditemukan suatu cara untuk memprediksinya.
+
+% Perujukan literatur dapat dilakukan dengan menambahkan entri baru di berkas. Tulisan ini merujuk pada \parencite{knuth2001art}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{resources/chapter-2-infrastructure-diagram.png}
+%     \caption{Contoh gambar}
+% \end{figure}
 
 \section{Data Preprocessing}
 
+Data terdiri dari 220.320 entri yang terbagi dalam 3 grup utama:
+
+\begin{enumerate}
+    \item Timestamp
+    \item Sensor
+    \item Status mesin: Label target yang diprediksi ketika kerusakan akan terjadi
+\end{enumerate}
+
+Timestamp tertulis dalam format: \texttt{tahun-bulan-tanggal jam:menit:detik}
+
+Sensor tersebar dalam 52 kolom dari \texttt{sensor\_00} hingga \texttt{sensor\_51} yang terdiri dari nilai float.
+
+Status mesin terdiri dari 3 kelas: NORMAL, BROKEN, dan RECOVERING yang masing-masing menyatakan kondisi normal, rusak, dan pulih pada pompa.
+
     \subsection{Data Cleaning}
+
+    Terdapat beberapa hal yang harus dilakukan terlebih dahulu pada data:
+
+    \begin{enumerate}
+        \item Menghapus kolom berlebih
+        \item Menghapus duplikat
+        \item Mengatasi nilai yang hilang (not available/NA)
+        \item Mengkonversi tipe data ke tipe yang benar
+    \end{enumerate}
+    
+    Untuk mengatasi nilai hilang dicari 10 sensor dengan jumlah NA terbanyak. Kemudian NA pada sensor tersebut diisi oleh nilai mean-nya (impute), sedangkan NA pada sensor lain dihapus.
 
     \subsection{Dimensional Reduction}
 
+    Komputasi dengan seluruh kolom dari sensor akan membutuhkan waktu yang lama dan tidak efisien. Sehingga diterapkan principal component analysis (PCA) untuk menghasilkan fitur baru yang dapat digunakan pada modeling. Namun sebelum itu data perlu diskala terlebih dahulu karena PCA merupakan algoritma berbasis jarak. Jika dilihat pada 10 data pertama besar nilai bacaan tidak konsisten pada tiap sensor, beberapa sangat besar dan yang lain justru sangat kecil.
+
         \subsubsection{Principal Component Analysis}
 
+        Setelah dianalisis berdasarkan nilai variansi ternyata 2 komponen utama pertama adalah yang paling penting, sehingga PCA dilakukan dengan menggunakan 2 komponen tersebut yang kemudian digunakan pada pelatihan model.
+
         \subsubsection{Stationarity and Autocorrelation}
+
+        Stationarity merupakan perilaku data time-series saat nilai mean dan standar deviasinya tidak berubah sepanjang waktu. Sedangkan autocorrelation merupakan perilaku data ketika terkorelasi dengan dirinya sendiri pada periode waktu yang berbeda.
+
+        Untuk mengecek stationarity secara kuantitatif dilakukan Augmented Dickey-Fuller Test pada kedua komponen utama dari PCA.
+
+        Untuk mengecek autocorrelation digunakan plot ACF (autocorrelation function) untuk memperoleh hasil secara visual.
+
+\section{Modeling}
+
+    \subsection{Interquartile Range (IQR)}
+
+    Strategi dari model ini adalah:
+
+    \begin{enumerate}
+        \item Hitung nilai IQR, yaitu beda dari persentil ke-75 (Q3) dan ke-25 (Q1)
+        \item Hitung batas atas dan bawah untuk outlier
+        \item Filter data yang berada di atas dan di bawah batas dan tandai sebagai outlier
+        \item Plot outlier di atas data time-series
+    \end{enumerate}
+
+    \subsection{K-Means Clustering}
+
+    Strategi dari model ini adalah:
+
+    \begin{enumerate}
+        \item Hitung jarak antara tiap titik dan centroid terdekatnya. Jarak terbesar dianggap sebagai anomali.
+        \item Gunakan parameter \texttt{outliers\_fraction} untuk memberi informasi pada algoritma tentang proporsi outlier yang ada pada data. Situasi dapat berbeda untuk tiap dataset. Namun sebagai langkah awal asumsikan \texttt{outliers\_fraction} = 0.13 (13\% dari data total adalah outlier).
+        \item Hitung jumlah outlier dengan \texttt{outliers\_fraction}.
+        \item Atur threshold sebagai jarak minimum dari outlier.
+        \item Filter data dengan jarak lebih dari threshold sebagai anomali.
+        \item Visualisasi anomali pada plot time-series.
+    \end{enumerate}
+
+    \subsection{Isolation Forest}
+
+    Model Isolation Forest ‘mengisolasi’ observasi dengan memilih fitur secara acak dan memilih nilai split antara nilai maksimum dan minimum untuk fitur terkait.
+
+    \section{Evaluation}
+
+    Dari ketiga model diperoleh jumlah data normal dan data anomali sebagai berikut.
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|l|r|r|}
+            \hline
+            \multicolumn{1}{|c|}{\textbf{Metode}} & \multicolumn{1}{c|}{\textbf{Normal}} & \multicolumn{1}{c|}{\textbf{Anomali}} \\ \hline
+            IQR                & 189.644 & 29.877 \\ \hline
+            K-Means Clustering & 190.984 & 28.537 \\ \hline
+            Isolation Forest   & 190.983 & 28.538 \\ \hline
+        \end{tabular}
+    \end{table}
