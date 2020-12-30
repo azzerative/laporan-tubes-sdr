@@ -6,7 +6,7 @@ Data dipisah menjadi dua bagian, yaitu data normal yang mengandung data dari sta
 
 Kemudian data dibagi menjadi 3 dataset, yaitu train, validation, dan test. Data train dan validation diambil pada bulan ke-8 awal dan akhir masing-masing dan digunakan untuk training model, sedangkan data test diambil pada selain bulan ke-8 untuk memprediksi hasil anomali.
 
-Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch yang memakan waktu sekitar 20 menit. Data train dan validation dibagi menjadi dua macam, yaitu yang telah menggunakan PCA dan tanpa PCA.
+Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch yang memakan waktu sekitar 20 menit. Data train dan validation dibagi menjadi dua macam, yaitu dengan PCA dan tanpa PCA.
 
 Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan training sehingga dapat diperoleh nilai loss yang dihasilkan.
 
@@ -14,7 +14,7 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
 
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{resources/LSTM/LSTM_PCA_LossDist.png}
+        \includegraphics[width=0.6\textwidth]{resources/LSTM/LSTM_PCA_LossDist.png}
         \caption{Distribusi loss LSTM dengan PCA}
     \end{figure}
 
@@ -36,7 +36,7 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
 
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{resources/LSTM/LSTM_noPCA_LossDist.png}
+        \includegraphics[width=0.6\textwidth]{resources/LSTM/LSTM_noPCA_LossDist.png}
         \caption{Distribusi loss LSTM tanpa PCA}
     \end{figure}
 
@@ -52,4 +52,10 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \end{tabular}
     \end{table}
 
-    Terlihat bahwa jumlah anomali pada data NORMAL lebih sedikit 3\% dari analisis dengan PCA, Namun jumlah anomali pada data selain NORMAL juga meningkat hampir 2 kali lipat.
+    Terlihat bahwa jumlah anomali pada data NORMAL lebih sedikit 3\% dari analisis dengan PCA, namun jumlah anomali pada data selain NORMAL juga meningkat hampir 2 kali lipat.
+
+    \subsection{Perbandingan dengan Model Acuan}
+
+    Dari segi kinerja model LSTM dapat menghasilkan hasil yang lebih baik dari model acuan sebanding dengan jumlah epoch yang lebih tinggi, namun waktu learning juga akan menjadi semakin lama. Sedangkan model acuan dapat dijalankan dalam waktu yang singkat (orde detik).
+
+    Model dengan dan tanpa PCA masing-masing menghasilkan prediksi anomali pada data NORMAL sebanyak 21\% dan 19\% dari total data, lebih besar dari model acuan yang paling tinggi menghasilkan 14\%.
