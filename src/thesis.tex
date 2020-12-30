@@ -26,6 +26,15 @@
 \usepackage{amsmath}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+
 % Python style for highlighting
 \newcommand\pythonstyle{\lstset{
 language=Python,
