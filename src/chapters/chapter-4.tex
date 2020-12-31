@@ -2,7 +2,7 @@
 
 \section{Prelude: Pemilihan Training Data}
 
-Perlu diperhatikan bahwa pada kasus ini, anomaly detection dikembangkan dengan pendekatan \emph{unsupervised learning}. Hal ini karena data \texttt{'machine status'} tidak mewakili apakah data berupa anomaly atau tidak.Ingat bahwa permasalahan yang ingin diselesaikan disini adalah mencari pola pada data yang mengindikasi penyebab kerusakan mesin. Hal ini berarti anomaly yang ingin dideteksi terjadi sebelum status mesin \texttt{BROKEN}. 
+Perlu diperhatikan bahwa pada kasus ini, anomaly detection dikembangkan dengan pendekatan \emph{unsupervised learning}. Hal ini karena data \texttt{machine\textunderscore status} tidak mewakili apakah data berupa anomaly atau tidak.Ingat bahwa permasalahan yang ingin diselesaikan disini adalah mencari pola pada data yang mengindikasi penyebab kerusakan mesin. Hal ini berarti anomaly yang ingin dideteksi terjadi sebelum status mesin \texttt{BROKEN}. 
 
 Data pada bulan 8 dipilih sebagai training data karena pada bulan tersebut tidak terjadi kerusakan mesin. Disini penulis berasumsi bahwa pada bulan 8 tidak terjadi anomali sama sekali pada data, karena tidak terjadi kerusakan mesin. Namun pada bulan lainnya, walau ada bagian data yang memiliki status mesin NORMAL, bisa saja sebenarnya sudah terjadi anomaly yang menyebabkan machine BROKEN pada hari-hari setelahnya.
 
