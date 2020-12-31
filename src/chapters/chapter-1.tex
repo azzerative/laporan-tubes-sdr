@@ -1,7 +1,11 @@
 \chapter{Pendahuluan}
 
-\section{Pemeliharaan Preventif terhadap Kerusakan Mesin}
-
 \section{Anomaly Detection}
 
 Anomaly detection adalah proses identifikasi data langka yang menimbulkan kecurigaan karena berbeda cukup signifikan dari mayoritas data. Umumnya anomali menandakan suatu masalah seperti kerusakan pada sistem. Anomali sering juga disebut dengan outlier, noise, dan deviasi.
+
+\section{Unsupervised Learning}
+
+Dalam implementasi anomaly detection, seringkali ditemukan bahwa apakah suatu data adalah normal ataukah anomaly tidak diketahui. Misalkan terdapat data dari berbagai sensor pada sistem mesin roket. Diketahui roket meledak setelah 5 jam beroperasi. Kapan anomaly mulai terjadi sebelum roket meledak tidak diketahui. Karena itu lah anomaly detection dalam kasus ini dilakukan dengan \emph{unsupervised learning}, yaitu model anomaly detection yang belajar mengenali anomaly tanpa mengetahui label data untuk validasi. Sehingga tidak bisa dihasilkan suatu \emph{loss function} yang menjadi referensi untuk training model seperti pada forecasting.
+
+Pendekatan \emph{unsupervised learning} pada anomaly detection dilakukan dengan melatih model pada data yang sudah diyakini tidak ada anomaly. Sehingga model dapat mengenali data-data normal yang akan muncul pada suatu mesin. Ketika ada data asing atau outlier, model akan gagal mengenali data tersebut dan mengidentifikasinya sebagai anomaly. \cite{unsupervised_anomaly}

@@ -1,9 +1,13 @@
-\chapter{Analisis}
+\chapter{Hasil dan Analisis}
 
-\section{Pemilihan Training Data}
+\section{Prelude: Pemilihan Training Data}
+
+Perlu diperhatikan bahwa pada kasus ini, anomaly detection dikembangkan dengan pendekatan \emph{unsupervised learning}. Hal ini karena data \texttt{'machine status'} tidak mewakili apakah data berupa anomaly atau tidak.Ingat bahwa permasalahan yang ingin diselesaikan disini adalah mencari pola pada data yang mengindikasi penyebab kerusakan mesin. Hal ini berarti anomaly yang ingin dideteksi terjadi sebelum status mesin \texttt{BROKEN}. 
+
 Data pada bulan 8 dipilih sebagai training data karena pada bulan tersebut tidak terjadi kerusakan mesin. Disini penulis berasumsi bahwa pada bulan 8 tidak terjadi anomali sama sekali pada data, karena tidak terjadi kerusakan mesin. Namun pada bulan lainnya, walau ada bagian data yang memiliki status mesin NORMAL, bisa saja sebenarnya sudah terjadi anomaly yang menyebabkan machine BROKEN pada hari-hari setelahnya.
 
-\section{LSTM Autoencoder}
+\section{Hasil}
+\subsection{LSTM Autoencoder}
 
 Data dipisah menjadi dua bagian, yaitu data normal yang mengandung data dari status NORMAL dan data anomali yang berasal dari status selain NORMAL (BROKEN dan RECOVERY).
 
@@ -13,7 +17,7 @@ Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch yang memakan w
 
 Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan training sehingga dapat diperoleh nilai loss yang dihasilkan.
 
-    \subsection{Dengan PCA}
+    \subsubsection{Dengan PCA}
 
     \begin{figure}[h]
         \centering
@@ -35,7 +39,7 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
 
     Jumlah anomali pada data selain NORMAL tidak mencakup keseluruhan total data sehingga terdapat prediksi yang berada pada data dalam kondisi BROKEN atau RECOVERY.
 
-    \subsection{Tanpa PCA}
+    \subsubsection{Tanpa PCA}
 
     \begin{figure}[h]
         \centering
@@ -57,7 +61,7 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
 
     Terlihat bahwa jumlah anomali pada data NORMAL lebih sedikit 3\% dari analisis dengan PCA, Namun jumlah anomali pada data selain NORMAL juga meningkat hampir 2 kali lipat.
 
-\section{Bayesian Probability}
+\subsection{Bayesian Probability}
 
 Data dipisah menjadi training data dan test data. Tidak ada validation data disini, karena validation data digunakan untuk mencegah model overfitting pada training data. Namun karena model bayesian adalah distribusi probabilitas, maka validation data akan menggeser kontur probabilitas dari overfitting pada training data menjadi tepat fit pada training dan validation data sekaligus. Jadi hasilnya tidak akan ada bedanya jika model dilatih pada training dan validation data yang digabungkan. Karena itu, validation data sudah digabungkan kedalam training data, yaitu data pada bulan 8.
 
@@ -89,7 +93,9 @@ Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas su
     \end{tabular}
 \end{table}
 
-\section{Perbandingan Hasil}
+\section{Analisis}
+\subsection{Komparasi Kecepatan Proses}
+\subsection{Perbandingan Prediksi Anomali}
 Ketiga model memiliki ....
 
 \begin{figure}[h]
