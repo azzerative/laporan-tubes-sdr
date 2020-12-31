@@ -7,6 +7,8 @@ INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\report.cls
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size12.clo
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size12.clo
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
+INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
+INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex\latex\txfonts\t1txtt.fd
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex\latex\txfonts\t1txtt.fd
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\txfonts\t1xbtt.tfm
@@ -230,6 +232,7 @@ INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb7
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr7t.tfm
 OUTPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\thesis.toc
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\chapters\chapter-1.tex
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\chapters\chapter-1.tex
@@ -238,7 +241,6 @@ INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sa
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmri7t.vf
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmri8r.tfm
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmtt12.tfm
-INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr7t.tfm
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\PCA_Plot.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\PCA_Plot.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\PCA_Plot.png
@@ -340,26 +342,45 @@ INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sa
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_anomaly_PMF.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_anomaly_PMF.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_anomaly_PMF.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
-INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IQR_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IQR_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IQR_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IQR_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IQR_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\KMeans_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\KMeans_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\KMeans_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\KMeans_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\KMeans_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IsoFor_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IsoFor_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IsoFor_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IsoFor_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Acuan\IsoFor_sensor_11.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_sensor_11.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_sensor_11.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_sensor_11.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_sensor_11.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\Bayes\Bayes_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_PCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
+INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\resources\LSTM\LSTM_noPCA_sensor_11.png
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\chapters\chapter-5.tex
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\chapters\chapter-5.tex
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmrc7t.tfm
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmrc7t.vf
 INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb7t.vf
+INPUT C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\thesis.aux
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\thesis.out
 INPUT c:\Users\user\OneDrive\Documents\ITB and Academics related files\TF4063 Sains Data Rekayasa\Tubes SDR\laporan-tubes-sdr\src\thesis.out

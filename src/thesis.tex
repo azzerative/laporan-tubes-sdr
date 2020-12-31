@@ -12,6 +12,8 @@
 
 \documentclass[12pt, a4paper, onecolumn, oneside, final]{report}
 
+\usepackage{enumitem}
+
 % Default fixed font does not support bold face
 \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
 \DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
@@ -125,8 +127,30 @@ showstringspaces=false            %
     % Index
     %\appendix
 
-    %\addcontentsline{toc}{part}{Lampiran}
-    %\part*{Lampiran}
+    \part*{Lampiran}
+    \addcontentsline{toc}{part}{Lampiran}
+    
+
+    Daftar file jupyter notebook yang penulis lampirkan dalam link google drive berikut:
+
+    Jupyter notebook program acuan dan modifikasi:
+    \begin{enumerate}[label=\textbf{L.\arabic*}]
+        \item Time Series Anomaly Detection -  Steps 1 and 2.ipynb
+        \item Time Series Anomaly Detection - Steps 3 to 5.ipynb
+        \item Model\textunderscore Reference\textunderscore Result\textunderscore Analysis.ipynb (modifikasi penulis) \label{refmodified_ipynb}
+    \end{enumerate}
+
+    Jupyter notebook program kembangan:
+    \begin{enumerate}[label=\textbf{L.\arabic*}]
+        \setcounter{enumi}{4}
+        \item LSTM\textunderscore ver3\textunderscore revB.ipynb \label{lstm_pca_ipynb}
+        \item LSTM\textunderscore ver3\textunderscore revB\textunderscore Result\textunderscore Analysis.ipynb \label{lstm_pca_res_ipynb}
+        \item LSTM\textunderscore noPCA.ipynb \label{lstm_nopca_ipynb}
+        \item LSTM\textunderscore noPCA\textunderscore Result\textunderscore Analysis.ipynb \label{lstm_pca_res_ipynb}
+        \item Bayes\textunderscore revB.ipynb \label{bayes_ipynb}
+        \item Bayes\textunderscore Result\textunderscore Analysis.ipynb \label{lstm_pca_res_ipynb}
+    \end{enumerate}
+
 
     %\input{chapters/appendix-1}
     %\input{chapters/appendix-2}
