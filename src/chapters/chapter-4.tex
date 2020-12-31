@@ -107,7 +107,7 @@ Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas su
     \end{tabular}
 \end{table}
 
-\section{Analisis}
+\section{Analisis} \label{ANALISIS}
 \subsection{Komparasi Kecepatan Proses}
 Kecepatan proses yang diukur adalah durasi waktu yang dibutuhkan untuk model training. Didapatkan hasil berikut.
 
@@ -115,14 +115,13 @@ Kecepatan proses yang diukur adalah durasi waktu yang dibutuhkan untuk model tra
     \centering
     \begin{tabular}{|l|r|l|}
         \hline
-        \multicolumn{1}{|c}{\textbf{Model}} & \multicolumn{1}{|c|}{\textbf{Durasi Model Training}} & \multicolumn{1}{c|}{\textbf{Keterangan}} \\ \hline
-        Interquartile Range (IQR)   &        1s 100ms 176$\mu$s    & Acuan \\
-        K-Means Clustering          &       46s 063ms 282$\mu$s    & Acuan \\
-        Isolation Forest            &       15s 139ms 811$\mu$s    & Acuan \\
-        Bayesian Probability        &       15s 031ms 475$\mu$s    & Kembangan \\
-        LSTM Autoencoder dengan PCA &   18m 02s 607ms 847$\mu$s    & Kembangan \\
-        LSTM Autoencoder tanpa PCA  &   39m 20s 885ms 569$\mu$s    & Kembangan \\
-        \hline
+        \multicolumn{1}{|c|}{\textbf{Model}} & \multicolumn{1}{c|}{\textbf{Durasi Model Training}} & \multicolumn{1}{c|}{\textbf{Keterangan}} \\ \hline
+        Interquartile Range (IQR)   & 1s 100ms 176$\mu$s      & Acuan     \\ \hline
+        K-Means Clustering          & 46s 063ms 282$\mu$s     & Acuan     \\ \hline
+        Isolation Forest            & 15s 139ms 811$\mu$s     & Acuan     \\ \hline
+        Bayesian Probability        & 15s 031ms 475$\mu$s     & Kembangan \\ \hline
+        LSTM Autoencoder dengan PCA & 18m 02s 607ms 847$\mu$s & Kembangan \\ \hline
+        LSTM Autoencoder tanpa PCA  & 39m 20s 885ms 569$\mu$s & Kembangan \\ \hline
     \end{tabular}
 \end{table}
 
@@ -177,11 +176,11 @@ Model K-Means Clustering dan Isolation Forest memakan durasi yang kecil karena p
 
     Pada model acuan IQR (\ref{IQRms}), kerusakan yang terprediksi hanyalah kerusakan mesin ketiga dan kelima. Kerusakan mesin pertama terdeteksi anomali sebanyak 2x namun dengan interval waktu yang cukup jauh sehingga terbilang gagal memprediksi kerusakan pertama.
 
-    Pada model acuan K-Means Clustering (\ref{KMms}) dan Isolation Forest (\ref{IFms}), hasil prediksi cukup mirip. Kerusakan mesin ke 3,5,6, dan 7 terprediksi dengan baik. Namun Isolation Forest mampu mendeteksi anomali sebelum kerusakan keempat, sehingga lebih bagus dibandingkan model K-Means Clustering.
+    Pada model acuan K-Means Clustering (\ref{KMms}) dan Isolation Forest (\ref{IFms}), hasil prediksi cukup mirip. Kerusakan mesin ke 3, 5, 6, dan 7 terprediksi dengan baik. Namun Isolation Forest mampu mendeteksi anomali sebelum kerusakan keempat, sehingga lebih bagus dibandingkan model K-Means Clustering.
 
-    Model Bayesian (\ref{Bms}) cukup berbeda, kerusakan yang terprediksi adalah kerusakan ke 1,3,4, dan 5. Ini menarik karena kerusakan pertama berhasil terprediksi sementara ketiga model acuan gagal mendeteksi hal tersebut. Akan tetapi kerusakan ke 6 dan 7 gagal terprediksi oleh model Bayesian.
+    Model Bayesian (\ref{Bms}) cukup berbeda, kerusakan yang terprediksi adalah kerusakan ke 1, 3, 4, dan 5. Ini menarik karena kerusakan pertama berhasil terprediksi sementara ketiga model acuan gagal mendeteksi hal tersebut. Akan tetapi kerusakan ke 6 dan 7 gagal terprediksi oleh model Bayesian.
 
-    Model LSTM lebih menarik lagi. Untuk LSTM tanpa PCA (\ref{nPms}), kerusakan yang terprediksi adalah kerusakan ke 1,3, dan 5. Sementara LSTM dengan PCA (\ref{wPms}) berhasil memprediksi kerusakan ke 1,2,3,4, dan 5. Hal ini tidak terekspektasi, karena LSTM tanpa PCA dilatih langsung dengan data 52 sensor sekaligus sementara LSTM dengan PCA hanya dilatih dengan data hasil PCA saja. Hal yang dapat disimpulkan dari fenomena ini adalah model LSTM tanpa PCA mengalami \emph{overfitting} pada data sensor. Sementara LSTM yang menggunakan PCA berhasil menangkap pola data yang penting saja, yaitu yang terkandung dalam PCA.
+    Model LSTM lebih menarik lagi. Untuk LSTM tanpa PCA (\ref{nPms}), kerusakan yang terprediksi adalah kerusakan ke 1, 3, dan 5. Sementara LSTM dengan PCA (\ref{wPms}) berhasil memprediksi kerusakan ke 1, 2, 3, 4, dan 5. Hal ini tidak terekspektasi, karena LSTM tanpa PCA dilatih langsung dengan data 52 sensor sekaligus sementara LSTM dengan PCA hanya dilatih dengan data hasil PCA saja. Hal yang dapat disimpulkan dari fenomena ini adalah model LSTM tanpa PCA mengalami \emph{overfitting} pada data sensor. Sementara LSTM yang menggunakan PCA berhasil menangkap pola data yang penting saja, yaitu yang terkandung dalam PCA.
 
     Terlihat bahwa model yang berperforma paling buruk adalah model acuan IQR. Kemudian model acuan K-Means Clustering dan Isolation Forest unggul dalam memprediksi kerusakan mesin pada bulan-bulan akhir yaitu kerusakan ke 6 dan 7. Sementara model kembangan ketiganya unggul dalam mempredeksi kerusakan pada bulan-bulan awal, terutama model LSTM tanpa PCA yang berhasil mempredeksi kerusakan 5 kali secara beruntun.
 
@@ -193,4 +192,4 @@ Model K-Means Clustering dan Isolation Forest memakan durasi yang kecil karena p
 
     Terlihat seperti pada \ref{IFms} bahwa model memprediksi beberapa anomali pada akhir bulan 5 dan awal bulan 6, yang kemudian berhenti memprediksi anomali untuk interval waktu yang cukup lama. Ini menandakan bahwa model mamprediksi beberapa anomali yang \emph{false positive} pada waktu tersebut.
 
-    Pada model LSTM Autoencoder dengan PCA (\ref{wPms}), terdapat hasil prediksi anomali yang \emph{false positive} pada akhir bulan 5, namun tidak ada anomali \emph{false positive} pada awal bulan 6. Ini berarti model LSTM Autoencoder dengan PCA memiliki \emph{false positive rate} lebih rencah dari model Isolation Forest.
+    Pada model LSTM Autoencoder dengan PCA (\ref{wPms}), terdapat hasil prediksi anomali yang \emph{false positive} pada akhir bulan 5, namun tidak ada anomali \emph{false positive} pada awal bulan 6. Ini berarti model LSTM Autoencoder dengan PCA memiliki \emph{false positive rate} lebih rendah dari model Isolation Forest.

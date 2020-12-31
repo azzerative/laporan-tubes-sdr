@@ -126,83 +126,12 @@ showstringspaces=false            %
     \printbibliography[heading=bibintoc,title={Daftar Pustaka}]
 
     % Index
-    %\appendix
+    \appendix
 
     \part*{Lampiran}
     \addcontentsline{toc}{part}{Lampiran}
-    
 
-    Daftar file jupyter notebook yang penulis lampirkan dalam link google drive berikut:
-    https://drive.google.com/drive/folders/1mjf-hefWUkvGAlhulI-Cl-TQ22Q1rUwh?usp=sharing
-
-    Jupyter notebook program acuan dan modifikasi:
-    \begin{enumerate}[label=\textbf{L.\arabic*}]
-        \item Time Series Anomaly Detection -  Steps 1 and 2.ipynb
-        \item Time Series Anomaly Detection - Steps 3 to 5.ipynb
-        \item Model\textunderscore Reference\textunderscore Result\textunderscore Analysis.ipynb (modifikasi penulis) \label{refmodified_ipynb}
-    \end{enumerate}
-
-    Jupyter notebook program kembangan:
-    \begin{enumerate}[label=\textbf{L.\arabic*}]
-        \setcounter{enumi}{4}
-        \item LSTM\textunderscore ver3\textunderscore revB.ipynb \label{lstm_pca_ipynb}
-        \item LSTM\textunderscore ver3\textunderscore revB\textunderscore Result\textunderscore Analysis.ipynb \label{lstm_pca_res_ipynb}
-        \item LSTM\textunderscore noPCA.ipynb \label{lstm_nopca_ipynb}
-        \item LSTM\textunderscore noPCA\textunderscore Result\textunderscore Analysis.ipynb \label{lstm_pca_res_ipynb}
-        \item Bayes\textunderscore revB.ipynb \label{bayes_ipynb}
-        \item Bayes\textunderscore Result\textunderscore Analysis.ipynb \label{lstm_pca_res_ipynb}
-    \end{enumerate}
-
-    Beberapa grafik yang representatif. Lengkapnya ada pada link google drive diatas.
-
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/Acuan/IQR_sensor_11.png}}
-        \caption{Hasil prediksi anomali model IQR} \label{IQR11}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/Acuan/KMeans_sensor_11.png}}
-        \caption{Hasil prediksi anomali model K-Means Clustering} \label{KM11}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/Acuan/IsoFor_sensor_11.png}}
-        \caption{Hasil prediksi anomali model Isolation Forest} \label{IF11}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/Acuan/IQR_machine_status.png}}
-        \caption{Anomali model IQR dan status mesin} \label{IQRms}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/Acuan/KMeans_machine_status.png}}
-        \caption{Anomali model K-Means Clustering dan status mesin} \label{KMms}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/Acuan/IsoFor_machine_status.png}}
-        \caption{Anomali model Isolation Forest dan status mesin} \label{IFms}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_machine_status.png}}
-        \caption{Anomali model Bayesian dan status mesin} \label{Bms}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_machine_status.png}}
-        \caption{Anomali model LSTM tanpa PCA dan status mesin} \label{nPms}
-    \end{figure}
-    \begin{figure}[h]
-        %\centering
-        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_machine_status.png}}
-        \caption{Anomali model LSTM dengan PCA dan status mesin} \label{wPms}
-    \end{figure}
-
-
-    %\input{chapters/appendix-1}
-    %\input{chapters/appendix-2}
+    \input{chapters/appendix-1}
+    \input{chapters/appendix-2}
 
 \end{document}
