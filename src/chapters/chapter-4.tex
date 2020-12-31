@@ -9,7 +9,7 @@ Data dipisah menjadi dua bagian, yaitu data normal yang mengandung data dari sta
 
 Kemudian data dibagi menjadi 3 dataset, yaitu train, validation, dan test. Data train dan validation diambil pada bulan ke-8 awal dan akhir masing-masing dan digunakan untuk training model, sedangkan data test diambil pada selain bulan ke-8 untuk memprediksi hasil anomali.
 
-Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch yang memakan waktu sekitar 20 menit. Data train dan validation dibagi menjadi dua macam, yaitu dengan PCA dan tanpa PCA.
+Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch yang memakan waktu sekitar 20 menit dengan menggunakan GPU (CUDA). Data train dan validation dibagi menjadi dua macam, yaitu dengan PCA dan tanpa PCA.
 
 Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan training sehingga dapat diperoleh nilai loss yang dihasilkan.
 
