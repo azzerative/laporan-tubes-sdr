@@ -13,7 +13,7 @@ Data dipisah menjadi dua bagian, yaitu data normal yang mengandung data dari sta
 
 Kemudian data dibagi menjadi 3 dataset, yaitu train, validation, dan test. Data train dan validation diambil pada bulan ke-8 awal dan akhir masing-masing dan digunakan untuk training model, sedangkan data test diambil pada selain bulan ke-8 untuk memprediksi hasil anomali.
 
-Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch yang memakan waktu sekitar 20 menit dengan menggunakan GPU (CUDA). Data train dan validation dibagi menjadi dua macam, yaitu dengan PCA dan tanpa PCA.
+Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch dengan menggunakan GPU (CUDA). Analisis dibagi menjadi dua macam, yaitu dengan PCA dan tanpa PCA.
 
 Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan training sehingga dapat diperoleh nilai loss yang dihasilkan.
 
@@ -25,6 +25,12 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \caption{Distribusi loss LSTM dengan PCA}
     \end{figure}
 
+    \begin{figure}[h]
+        % \centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_model_loss.png}}
+        \caption{Plot loss LSTM dengan PCA}
+    \end{figure}
+
     Dengan menggunakan nilai threshold 500, diperoleh jumlah data anomali sebagai berikut.
 
     \begin{table}[h]
@@ -32,8 +38,8 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \begin{tabular}{|l|r|r|r|}
             \hline
             \multicolumn{1}{|c|}{\textbf{Jenis anomali}} & \multicolumn{1}{c|}{\textbf{Jumlah}} & \multicolumn{1}{c|}{\textbf{Total data}} & \multicolumn{1}{c|}{\textbf{Persentase (\%)}} \\ \hline
-            Anomali pada data NORMAL                     & 33866                                & 160430                                   & 21                                       \\ \hline
-            Anomali pada data selain NORMAL              & 2237                                 & 14454                                    & 15                                       \\ \hline
+            Anomali pada data NORMAL                     & 33.866                                & 160.430                                   & 21                                       \\ \hline
+            Anomali pada data selain NORMAL              & 2.237                                 & 14.454                                    & 15                                       \\ \hline
         \end{tabular}
     \end{table}
 
@@ -47,6 +53,12 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \caption{Distribusi loss LSTM tanpa PCA}
     \end{figure}
 
+    \begin{figure}[h]
+        % \centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_model_loss.png}}
+        \caption{Plot loss LSTM dengan PCA}
+    \end{figure}
+
     Dengan menggunakan nilai threshold 3500, diperoleh jumlah data anomali sebagai berikut.
 
     \begin{table}[h]
@@ -54,8 +66,8 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \begin{tabular}{|l|r|r|r|}
             \hline
             \multicolumn{1}{|c|}{\textbf{Jenis anomali}} & \multicolumn{1}{c|}{\textbf{Jumlah}} & \multicolumn{1}{c|}{\textbf{Total data}} & \multicolumn{1}{c|}{\textbf{Persentase (\%)}} \\ \hline
-            Anomali pada data NORMAL                     & 30182                                & 160430                                   & 19                                       \\ \hline
-            Anomali pada data selain NORMAL              & 4979                                 & 14454                                    & 34                                       \\ \hline
+            Anomali pada data NORMAL                     & 30.182                                & 160.430                                   & 19                                       \\ \hline
+            Anomali pada data selain NORMAL              & 4.979                                 & 14.454                                    & 34                                       \\ \hline
         \end{tabular}
     \end{table}
 
@@ -88,8 +100,8 @@ Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas su
     \begin{tabular}{|l|r|r|r|}
         \hline
         \multicolumn{1}{|c|}{\textbf{Jenis anomali}} & \multicolumn{1}{c|}{\textbf{Jumlah}} & \multicolumn{1}{c|}{\textbf{Total data}} & \multicolumn{1}{c|}{\textbf{Persentase (\%)}} \\ \hline
-        Anomali pada data NORMAL                     & 34527                                & 160430                                   & 22                                       \\ \hline
-        Anomali pada data selain NORMAL              & 2567                                 & 14454                                    & 18                                       \\ \hline
+        Anomali pada data NORMAL                     & 34.527                                & 160.430                                   & 22                                       \\ \hline
+        Anomali pada data selain NORMAL              & 2.567                                 & 14.454                                    & 18                                       \\ \hline
     \end{tabular}
 \end{table}
 
@@ -118,21 +130,41 @@ Model IQR dan Bayesian membutuhkan durasi yang cukup sedikit. Hal ini karena mod
 
 Model K-Means Clustering dan Isolation Forest memakan durasi yang kecil karena pendekatan yang dilakukan adalah menganggap data hanya terbagi antara 2 kluster saja, yaitu kluster normal dan anomaly. Apabila asumsi kluster lebih dari 2 mungkin akan memakan waktu lebih lama, namun ini sudah bukan lagi Anomaly Detection melainkan Clustering Data.
 
-\subsection{Perbandingan Prediksi Anomali}
-Ketiga model memiliki ....
+    \subsection{Perbandingan Prediksi Anomali}
+    Terlihat pada plot bahwa ketiga model kembangan menunjukkan hasil deteksi anomali yang cukup mirip. Karena pendekatan pengembangan data yang digunakan adalah \textit{unsupervised learning}, terdapat beberapa anomali yang muncul pada saat sebelum terjadinya kerusakan mesin yang menunjukkan bahwa walaupun status mesin pada saat itu adalah NORMAL, namun sudah ada indikasi bahwa mesin akan mengalami kerusakan beberapa waktu ke depan.
 
-\begin{figure}[h]
-    %\centering
-    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_sensor_11.png}}
-    \caption{Hasil deteksi anomali model LSTM tanpa PCA}
-\end{figure}
-\begin{figure}[h]
-    %\centering
-    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_sensor_11.png}}
-    \caption{Hasil deteksi anomali model LSTM dengan PCA}
-\end{figure}
-\begin{figure}[h]
-    %\centering
-    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_sensor_11.png}}
-    \caption{Hasil deteksi anomali model Bayesian}
-\end{figure}
+    \begin{figure}[h]
+        %\centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_sensor_11.png}}
+        \caption{Hasil deteksi anomali model LSTM tanpa PCA}
+    \end{figure}
+    
+    \begin{figure}[h]
+        %\centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_sensor_11.png}}
+        \caption{Hasil deteksi anomali model LSTM dengan PCA}
+    \end{figure}
+    
+    \begin{figure}[h]
+        %\centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_sensor_11.png}}
+        \caption{Hasil deteksi anomali model Bayesian}
+    \end{figure}
+
+    Sedangkan jika dilihat dari model loss, ketiga model kembangan menunjukkan bahwa hanya terdapat satu data dengan kerusakan mesin yang memiliki nilai loss tinggi cukup tinggi. Hal ini menunjukkan bahwa anomali tidak harus terjadi pada saat terjadi kerusakan mesin, sehingga mendukung pendekatan \textit{unsupervised learning}.
+
+    \begin{table}[]
+        \centering
+        \begin{tabular}{|l|r|l|}
+            \hline
+            \multicolumn{1}{|c|}{\textbf{Metode}} & \multicolumn{1}{c|}{\textbf{Persentase (\%)}} & \multicolumn{1}{c|}{\textbf{Keterangan}} \\ \hline
+            Interquartile Range (IQR)   & 14 & Acuan     \\ \hline
+            K-Means Clustering          & 13 & Acuan     \\ \hline
+            Isolation Forest            & 13 & Acuan     \\ \hline
+            Bayesian Probability        & 22 & Kembangan \\ \hline
+            LSTM Autoencoder dengan PCA & 21 & Kembangan \\ \hline
+            LSTM Autoencoder tanpa PCA  & 19 & Kembangan \\ \hline
+        \end{tabular}
+    \end{table}
+
+    Karena prediksi pada model acuan tidak menghasilkan distribusi loss dari model maka akan dianalisis berdasarkan jumlah anomali yang diprediksi. Hasil prediksi model kembangan seluruhnya menghasilkan jumlah yang lebih besar dari model acuan. Namun perbandingan jumlah prediksi dirasa kurang akurat karena bergantung oleh nilai threshold yang digunakan tiap model.
