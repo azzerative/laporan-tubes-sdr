@@ -77,24 +77,26 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
 
 Data dipisah menjadi training data dan test data. Tidak ada validation data disini, karena validation data digunakan untuk mencegah model overfitting pada training data. Namun karena model bayesian adalah distribusi probabilitas, maka validation data akan menggeser kontur probabilitas dari overfitting pada training data menjadi tepat fit pada training dan validation data sekaligus. Jadi hasilnya tidak akan ada bedanya jika model dilatih pada training dan validation data yang digabungkan. Karena itu, validation data sudah digabungkan kedalam training data, yaitu data pada bulan 8.
 
-Hasil prediksi model Bayesian pada test data menghasilkan distribusi probabilitas data merupakan data normal sebagai berikut.
-\begin{figure}[h]
+Hasil prediksi model Bayesian pada test data menghasilkan distribusi probabilitas data merupakan data normal diperoleh pada \ref{bayes_probdist}. Kemudian probabilitas tidak terjadi anomali dan terjadi anomali pada tiap waktu diperoleh pada \ref{bayes_normal_pmf} dan \ref{bayes_anomaly_pmf}. Perlu diperhatikan bahwa \ref{bayes_anomaly_pmf} hanyalah $ 1 - P(x_n) $ dari tiap data pada \ref{bayes_normal_pmf}, namun grafik probabilitas anomaly lebih mudah untuk dikomparasikan dengan hasil grafik model loss pada metode LSTM Autoencoder.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{resources/Bayes/Bayes_ProbDist.png}
-    \caption{Prediksi Probabilitas bukan Anomali}
+    \caption{Prediksi Probabilitas bukan Anomali} \label{bayes_probdist}
 \end{figure}
-Kemudian probabilitas tidak terjadi anomali dan terjadi anomali pada tiap waktu sebagai berikut.
-\begin{figure}[h]
+\begin{figure}[H]
     %\centering
     \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_normal_PMF.png}}
-    \caption{Prediksi Probabilitas bukan Anomali}
+    \caption{Prediksi Probabilitas bukan Anomali} \label{bayes_normal_pmf}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[H]
     %\centering
     \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_anomaly_PMF.png}}
-    \caption{Prediksi Probabilitas terjadi Anomali}
+    \caption{Prediksi Probabilitas terjadi Anomali} \label{bayes_anomaly_pmf}
 \end{figure}
+
 Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas suatu data merupakan data normal dibawah 0.85 sudah ditetapkan sebagai data yang likely merupakan anomaly. Diperoleh jumlah data anomali sebagai berikut.
+
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|r|r|r|}
@@ -153,7 +155,7 @@ Model K-Means Clustering dan Isolation Forest memakan durasi yang kecil karena p
 
     Sedangkan jika dilihat dari model loss, ketiga model kembangan menunjukkan bahwa hanya terdapat satu data dengan kerusakan mesin yang memiliki nilai loss tinggi cukup tinggi. Hal ini menunjukkan bahwa anomali tidak harus terjadi pada saat terjadi kerusakan mesin, sehingga mendukung pendekatan \textit{unsupervised learning}.
 
-    \begin{table}[]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|l|r|l|}
             \hline
@@ -168,3 +170,27 @@ Model K-Means Clustering dan Isolation Forest memakan durasi yang kecil karena p
     \end{table}
 
     Karena prediksi pada model acuan tidak menghasilkan distribusi loss dari model maka akan dianalisis berdasarkan jumlah anomali yang diprediksi. Hasil prediksi model kembangan seluruhnya menghasilkan jumlah yang lebih besar dari model acuan. Namun perbandingan jumlah prediksi dirasa kurang akurat karena bergantung oleh nilai threshold yang digunakan tiap model.
+
+    \subsection{Keberhasilan Memprediksi Kerusakan Mesin}
+
+    Asumsi yang digunakan adalah sebelum terjadi kerusakan mesin, akan terdeteksi anomali. Hasil pengukuran sensor yang menunjukkan data anomali ini lah yang mengindikasikan bahwa terjadi hal yang tidak wajar pada mesin dan akan menyebabkan kerusakan jika dibiarkan. Untuk melihat keberhasilan tiap model memprediksi kerusakan mesin, atau mendeteksi anomali yang menyebabkan mesin rusak, dapat dilihat lebih mudah pada grafik-grafik \ref{IQRms}, \ref{KMms}, \ref{IFms}, \ref{Bms}, \ref{nPms}, \ref{wPms}.
+
+    Pada model acuan IQR (\ref{IQRms}), kerusakan yang terprediksi hanyalah kerusakan mesin ketiga dan kelima. Kerusakan mesin pertama terdeteksi anomali sebanyak 2x namun dengan interval waktu yang cukup jauh sehingga terbilang gagal memprediksi kerusakan pertama.
+
+    Pada model acuan K-Means Clustering (\ref{KMms}) dan Isolation Forest (\ref{IFms}), hasil prediksi cukup mirip. Kerusakan mesin ke 3,5,6, dan 7 terprediksi dengan baik. Namun Isolation Forest mampu mendeteksi anomali sebelum kerusakan keempat, sehingga lebih bagus dibandingkan model K-Means Clustering.
+
+    Model Bayesian (\ref{Bms}) cukup berbeda, kerusakan yang terprediksi adalah kerusakan ke 1,3,4, dan 5. Ini menarik karena kerusakan pertama berhasil terprediksi sementara ketiga model acuan gagal mendeteksi hal tersebut. Akan tetapi kerusakan ke 6 dan 7 gagal terprediksi oleh model Bayesian.
+
+    Model LSTM lebih menarik lagi. Untuk LSTM tanpa PCA (\ref{nPms}), kerusakan yang terprediksi adalah kerusakan ke 1,3, dan 5. Sementara LSTM dengan PCA (\ref{wPms}) berhasil memprediksi kerusakan ke 1,2,3,4, dan 5. Hal ini tidak terekspektasi, karena LSTM tanpa PCA dilatih langsung dengan data 52 sensor sekaligus sementara LSTM dengan PCA hanya dilatih dengan data hasil PCA saja. Hal yang dapat disimpulkan dari fenomena ini adalah model LSTM tanpa PCA mengalami \emph{overfitting} pada data sensor. Sementara LSTM yang menggunakan PCA berhasil menangkap pola data yang penting saja, yaitu yang terkandung dalam PCA.
+
+    Terlihat bahwa model yang berperforma paling buruk adalah model acuan IQR. Kemudian model acuan K-Means Clustering dan Isolation Forest unggul dalam memprediksi kerusakan mesin pada bulan-bulan akhir yaitu kerusakan ke 6 dan 7. Sementara model kembangan ketiganya unggul dalam mempredeksi kerusakan pada bulan-bulan awal, terutama model LSTM tanpa PCA yang berhasil mempredeksi kerusakan 5 kali secara beruntun.
+
+    Perlu diperhatikan bahwa metode LSTM berhasil mendeteksi kerusakan kedua, yang memiliki anomali yang overlap dengan data normal. Anomali yang overlap dengan data normal ini lah yang menyebabkan kegagalan metode-metode berbasis clustering untuk mendeteksi data tersebut sebagai anomali. Namun LSTM yang berbasis Neural Network memiliki mekanisme yang sangat berbeda sehingga mampu mendeteksi anomali overlap ini.
+
+    \subsection{The Best Model}
+
+    Diperoleh bahwa terdapat 2 model terbaik yang mampu memprediksi kerusakan mesin terbanyak, yaitu model acuan Isolation Forest dan model kembangan LSTM Autoencoder dengan PCA. Untuk menganalisis lebih jauh, maka perlu diperhatikan hasil prediksi kerusakan yang gagal. Yaitu hasil prediksi yang menunjukkan anomali namun ternyata tidak terjadi kerusakan mesin akibat anomali tersebut. Hal ini diistilahkan sebagai \emph{false positive anomaly}.
+
+    Terlihat seperti pada \ref{IFms} bahwa model memprediksi beberapa anomali pada akhir bulan 5 dan awal bulan 6, yang kemudian berhenti memprediksi anomali untuk interval waktu yang cukup lama. Ini menandakan bahwa model mamprediksi beberapa anomali yang \emph{false positive} pada waktu tersebut.
+
+    Pada model LSTM Autoencoder dengan PCA (\ref{wPms}), terdapat hasil prediksi anomali yang \emph{false positive} pada akhir bulan 5, namun tidak ada anomali \emph{false positive} pada awal bulan 6. Ini berarti model LSTM Autoencoder dengan PCA memiliki \emph{false positive rate} lebih rencah dari model Isolation Forest.

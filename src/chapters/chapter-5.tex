@@ -1,5 +1,15 @@
 \chapter{Penutup}
 
 \section{Kesimpulan}
+Berdasarkan analisis pada hasil prediksi anomaly keenam model seperti pada \ref{sec:Hasil dan Analisis}, disimpulkan:
+\begin{enumerate}
+    \item Model kembangan unggul dalam mendeteksi kerusakan pada bulan-bulan awal, namun model acuan unggul pada bulan-bulan akhir.
+    \item Model kembangan LSTM Autoencoder berhasil mendeteksi anomali yang overlap dengan data normal.
+    \item Model terbaik adalah LSTM Autoencoder dengan PCA dalam kriteria keberhasilan memprediksi kerusakan mesin dan \emph{false positive rate}.
+\end{enumerate}
 
 \section{Saran}
+
+Masih banyak metode dan model lain yang dapat digunakan dalam kasus anomaly detection. Tidak hanya itu saja, tahap preprocessing data juga dapat berpenguh pada performa model. Kemudian, banyak faktor-faktor luar yang tidak terkandung dalam data yang dapat mempengaruhi \emph{model learning}, contohnya maintenance mesin tak terjadwal yang mungkin dilakukan oleh pemilik mesin. Durasi maintenance mesin yang berubah-ubah juga dapat membuat model sulit mengenali anomali. Kerusakan yang tidak diakibatkan oleh kesalahan internal mesin juga mungkin terjadi, misalnya kerusakan mesin akibat \emph{human error}, ini akan menyebabkan kerusakan mendadak tanpa terdeteksi anomali sebelum kerusakan terjadi.
+
+Dengan begitu, tidak ada suatu metode eksak yang terbaik dalam anomaly detection. Yang ada hanyalah model yang paling cocok pada suatu mesin untuk memprediksi kerusakan. Seberapa \emph{severe} kerusakan yang dapat terjadi juga menjadi pertimbangan, serta \emph{computational cost} yang dibutuhkan untuk melatih model.
