@@ -13,7 +13,7 @@ Data dipisah menjadi dua bagian, yaitu data normal yang mengandung data dari sta
 
 Kemudian data dibagi menjadi 3 dataset, yaitu train, validation, dan test. Data train dan validation diambil pada bulan ke-8 awal dan akhir masing-masing dan digunakan untuk training model, sedangkan data test diambil pada selain bulan ke-8 untuk memprediksi hasil anomali.
 
-Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch yang memakan waktu sekitar 20 menit dengan menggunakan GPU (CUDA). Data train dan validation dibagi menjadi dua macam, yaitu dengan PCA dan tanpa PCA.
+Proses training model LSTM Autoencoder dilakukan sebanyak 5 epoch dengan menggunakan GPU (CUDA). Analisis dibagi menjadi dua macam, yaitu dengan PCA dan tanpa PCA.
 
 Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan training sehingga dapat diperoleh nilai loss yang dihasilkan.
 
@@ -23,6 +23,12 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \centering
         \includegraphics[width=0.6\textwidth]{resources/LSTM/LSTM_PCA_LossDist.png}
         \caption{Distribusi loss LSTM dengan PCA}
+    \end{figure}
+
+    \begin{figure}[h]
+        % \centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_model_loss.png}}
+        \caption{Plot loss LSTM dengan PCA}
     \end{figure}
 
     Dengan menggunakan nilai threshold 500, diperoleh jumlah data anomali sebagai berikut.
@@ -45,6 +51,12 @@ Kemudian dilakukan prediksi pada data test dari model yang telah dilakukan train
         \centering
         \includegraphics[width=0.6\textwidth]{resources/LSTM/LSTM_noPCA_LossDist.png}
         \caption{Distribusi loss LSTM tanpa PCA}
+    \end{figure}
+
+    \begin{figure}[h]
+        % \centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_model_loss.png}}
+        \caption{Plot loss LSTM dengan PCA}
     \end{figure}
 
     Dengan menggunakan nilai threshold 3500, diperoleh jumlah data anomali sebagai berikut.
@@ -94,22 +106,28 @@ Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas su
 \end{table}
 
 \section{Analisis}
-\subsection{Komparasi Kecepatan Proses}
-\subsection{Perbandingan Prediksi Anomali}
-Ketiga model memiliki ....
+    \subsection{Komparasi Kecepatan Proses}
+    
+    \subsection{Perbandingan Prediksi Anomali}
 
-\begin{figure}[h]
-    %\centering
-    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_sensor_11.png}}
-    \caption{Hasil deteksi anomali model LSTM tanpa PCA}
-\end{figure}
-\begin{figure}[h]
-    %\centering
-    \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_sensor_11.png}}
-    \caption{Hasil deteksi anomali model LSTM dengan PCA}
-\end{figure}
-\begin{figure}[h]
-    %\centering
-    \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_sensor_11.png}}
-    \caption{Hasil deteksi anomali model Bayesian}
-\end{figure}
+    \begin{figure}[h]
+        %\centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_noPCA_sensor_11.png}}
+        \caption{Hasil deteksi anomali model LSTM tanpa PCA}
+    \end{figure}
+    
+    \begin{figure}[h]
+        %\centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/LSTM/LSTM_PCA_sensor_11.png}}
+        \caption{Hasil deteksi anomali model LSTM dengan PCA}
+    \end{figure}
+    
+    \begin{figure}[h]
+        %\centering
+        \centerline{\includegraphics[width=1.4\textwidth]{resources/Bayes/Bayes_sensor_11.png}}
+        \caption{Hasil deteksi anomali model Bayesian}
+    \end{figure}
+
+    Karena prediksi pada model acuan tidak menghasilkan distribusi loss dari model maka akan dianalisis berdasarkan jumlah anomali yang diprediksi.
+
+    Hasil prediksi model kembangan seluruhnya menghasilkan jumlah yang lebih besar dari model acuan. Model LSTM dengan dan tanpa PCA beserta Bayesian masing-masing memprediksi anomali sebanyak 21\%, 19\%, dan 22\%, sedangkan model IQR, K-Means Clustering, dan Isolation Forest masing-masing menghasilkan 14\%, 13\%, dan 13\%. Namun perbandingan jumlah prediksi dirasa kurang akurat karena bergantung oleh nilai threshold yang digunakan tiap model.
