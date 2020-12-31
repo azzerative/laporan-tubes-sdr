@@ -95,6 +95,27 @@ Dengan menetapkan nilai threshold sebesar 0.85, ini berarti jika probabilitas su
 
 \section{Analisis}
 \subsection{Komparasi Kecepatan Proses}
+Kecepatan proses yang diukur adalah durasi waktu yang dibutuhkan untuk model training. Didapatkan hasil berikut.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|l|}
+        \hline
+        \multicolumn{1}{|c}{\textbf{Model}} & \multicolumn{1}{|c|}{\textbf{Durasi Model Training}} & \multicolumn{1}{c|}{\textbf{Keterangan}} \\ \hline
+        Interquartile Range (IQR)   &        1s 100ms 176$\mu$s    & Acuan \\
+        K-Means Clustering          &       46s 063ms 282$\mu$s    & Acuan \\
+        Isolation Forest            &       15s 139ms 811$\mu$s    & Acuan \\
+        Bayesian Probability        &       15s 031ms 475$\mu$s    & Kembangan \\
+        LSTM Autoencoder dengan PCA &   18m 02s 607ms 847$\mu$s    & Kembangan \\
+        LSTM Autoencoder tanpa PCA  &   39m 20s 885ms 569$\mu$s    & Kembangan \\
+        \hline
+    \end{tabular}
+\end{table}
+Terlihat bahwa durasi model training cukup cepat, kecuali untuk model LSTM Autoencoder. Hal ini karena LSTM Autoencoder memiliki basis Neural Network yang mempunyai multilayer. Dalam model yang penulis kembangkan, total layer sebanyak 128 lapis, yang membuat proses komputasi cukup ekstensif walau sudah dibantu dengan menggunakan driver CUDA.
+
+Model IQR dan Bayesian membutuhkan durasi yang cukup sedikit. Hal ini karena model dilatih dengan perhitungan statistik yang sederhana secara komputasi. Model IQR hanya perlu menghitung tiap data terhadap range antar quartil atas dan quartil bawah. Kemudian model Bayesian sudah menggunakan penyederhanaan matematik secara analitik yang cukup panjang, sehingga iterasi numerik yang perlu dilakukan tidak terlalu kompleks. Hal ini juga dibantu dengan scale down data input pada model Bayesian. Walaupun model Bayesian yang menggunakan matematik yang jauh lebih rumit dibandingkan IQR membuat durasi training 15x lebih lama.
+
+Model K-Means Clustering dan Isolation Forest memakan durasi yang kecil karena pendekatan yang dilakukan adalah menganggap data hanya terbagi antara 2 kluster saja, yaitu kluster normal dan anomaly. Apabila asumsi kluster lebih dari 2 mungkin akan memakan waktu lebih lama, namun ini sudah bukan lagi Anomaly Detection melainkan Clustering Data.
+
 \subsection{Perbandingan Prediksi Anomali}
 Ketiga model memiliki ....
 
